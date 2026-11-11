@@ -27,7 +27,7 @@
 - [ ] Studio diepgaand nakijken: indicatoren (bv. "verborgen") niet buiten kader of afgesneden
 - [x] Workspace-studio: knop heet "Workspace QR-code" en opent meteen de QR van die workspace
 - [ ] Hoofdstijl = strakke klassieke toets (geen gloed, harde schaduwrand + indruk-effect); glasstijl echt glas; knopvormen veranderen mee
-- [ ] Onthouden welke pagina laatst open was (privé of geverifieerd)
+- [x] Onthouden welke pagina laatst open was (privé of geverifieerd)
 - [ ] ROUT-badge klopt niet altijd
 - [x] AI-agent sandbox: MCP-tools zonder login, live end-to-end getest op Neon (rout_app-rol)
 - [x] Wees-data: agent-workspaces en sandbox-sleutels leven 24 uur; opruimen bij elke nieuwe sandbox + bestaande cron-route
@@ -36,9 +36,9 @@
 - [ ] Neon-verbinding omzetten naar rout_app-account (nu nog neondb_owner; app schakelt per transactie wel naar rout_app)
 - [x] Workspace-slug: draft-username mist het achtervoegsel dat de database aan de slug toevoegt
 - [x] Workspace QR-code: knop "Profiel-QR-code" hernoemen en bewaarde workspace-QR laden
-- [ ] Studio onthoudt laatst gekozen privé/geverifieerd
+- [x] Studio onthoudt laatst gekozen privé/geverifieerd
 - [ ] ROUT-badge: "badge verbergen" respecteren op externe sites; doneerpagina en etalage even streng als profiel
-- [ ] Kleine Studio-labels ("Verborgen") binnen hun kader houden
+- [x] Kleine Studio-labels ("Verborgen") binnen hun kader houden
 - [ ] Glasstijl verbeteren
 - [ ] Kaartteksten EN/FR/DE (beveiligingsvak + ~30 teksten)
 - [ ] Ingelogde kaarttest: bevriezen, blokkeren, vervangen, scanpagina, widget
