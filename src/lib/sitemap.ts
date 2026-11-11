@@ -14,7 +14,7 @@ export const STATIC_SITEMAP_ENTRIES: SitemapEntry[] = [
   { path: "/wifi-qr", changefreq: "monthly", priority: 0.7 },
   { path: "/vcard-qr", changefreq: "monthly", priority: 0.7 },
   ...["/data-deletion", "/manifesto", "/privacy", "/security", "/self-hosting", "/sovereignty", "/terms", "/status", "/developers", "/verify"].map(path => ({ path, changefreq: "monthly" as const, priority: 0.6 })),
-  ...["/iban-qr", "/batch", "/signature", "/email-templates", "/gift", "/tour"].map(path => ({ path, changefreq: "monthly" as const, priority: 0.7 })),
+  ...["/iban-qr", "/card", "/hub", "/batch", "/signature", "/email-templates", "/gift", "/tour"].map(path => ({ path, changefreq: "monthly" as const, priority: 0.7 })),
 ];
 
 const CATEGORY_RULES: Record<DocCategory, Pick<SitemapEntry, "changefreq" | "priority">> = {
