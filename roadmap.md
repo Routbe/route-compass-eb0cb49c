@@ -42,4 +42,4 @@
 - [ ] Glasstijl verbeteren
 - [ ] Kaartteksten EN/FR/DE (beveiligingsvak + ~30 teksten)
 - [ ] Ingelogde kaarttest: bevriezen, blokkeren, vervangen, scanpagina, widget
-- [ ] Testen live-blokken en afspraakbevestiging uitvoeren
+- [x] Testen live-blokken en afspraakbevestiging uitgevoerd (55 geslaagd)
