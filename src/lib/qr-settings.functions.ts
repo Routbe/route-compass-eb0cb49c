@@ -10,6 +10,24 @@ export const getQrSettingsFn = createServerFn({ method: "GET" })
     return normalizeQrSettings(rows[0]?.style);
   });
 
+/** Saved QR style of a workspace profile; any member may read it, the draft holds the latest. */
+export const getWorkspaceQrSettingsFn = createServerFn({ method: "GET" })
+  .middleware([requireAuth])
+  .inputValidator((data: unknown) => {
+    const d = (data ?? {}) as { workspaceId?: unknown };
+    if (typeof d.workspaceId !== "string" || !/^[0-9a-f-]{36}$/i.test(d.workspaceId)) throw new Error("invalid_workspace");
+    return { workspaceId: d.workspaceId };
+  })
+  .handler(async ({ data, context }) => {
+    const { getWorkspaceRole } = await import("@/lib/workspaces.server");
+    if (!(await getWorkspaceRole(context.userId, data.workspaceId))) throw new Error("forbidden");
+    const { sql } = await import("@/lib/neon");
+    const rows = await sql`select coalesce(d.payload->'displayPrefs'->'qrSettings', w.public_profile->'studio'->'displayPrefs'->'qrSettings') as style
+      from public.workspaces w left join public.workspace_profile_drafts d on d.workspace_id = w.id
+      where w.id = ${data.workspaceId}`;
+    return normalizeQrSettings(rows[0]?.style);
+  });
+
 /** Standalone opslag van de profiel-QR-stijl in `profiles.display_prefs->'qrSettings'`. */
 export const saveQrSettingsFn = createServerFn({ method: "POST" })
   .middleware([requireAuth])

@@ -22,6 +22,9 @@ export interface GeneratorDesign {
 
 export const ProfileQrDesignContext = createContext<ProfileQrStyle | null>(null);
 
+/** Lets the profile-hub picker load a saved style (personal or workspace) into the designer. */
+export const ProfileQrApplyContext = createContext<((style: ProfileQrStyle) => void) | null>(null);
+
 const HEX = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
 /** Maps generator styling onto the profile QR style stored in display_prefs.qrSettings. */
