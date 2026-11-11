@@ -7,8 +7,10 @@ import {
   listTools,
   rpcError,
   rpcResult,
+  sandboxRequestParts,
   toolResultFromAgent,
   type JsonRpcRequest,
+  type McpTool,
 } from "@/lib/mcp-server/protocol";
 
 /**
@@ -38,6 +40,38 @@ async function agentHandler(path: string): Promise<Handler | null> {
           : null;
   const server = (mod?.Route.options as { server?: { handlers?: { POST?: Handler } } } | undefined)?.server;
   return server?.handlers?.POST ?? null;
+}
+
+const SANDBOX_ROUTES: Record<string, () => Promise<{ Route: { options: unknown } }>> = {
+  "/api/agent/sandbox": () => import("./api_.agent.sandbox"),
+  "/api/agent/sandbox/workspace": () => import("./api_.agent.sandbox_.workspace"),
+  "/api/agent/sandbox/profile": () => import("./api_.agent.sandbox_.profile"),
+  "/api/agent/sandbox/apps": () => import("./api_.agent.sandbox_.apps"),
+  "/api/v1/pow/challenge": () => import("./api_.v1.pow.challenge"),
+};
+
+async function callSandbox(tool: McpTool, args: Record<string, unknown>, request: Request) {
+  const spec = tool.sandbox!;
+  const load = SANDBOX_ROUTES[spec.path];
+  const mod = load ? await load() : null;
+  const handlers = (mod?.Route.options as { server?: { handlers?: Record<string, Handler> } } | undefined)?.server?.handlers;
+  const handler = handlers?.[spec.method];
+  if (!handler) return toolResultFromAgent(503, { error: "server_error", message: "Sandbox handler unavailable." });
+  const { headers, body, path } = sandboxRequestParts(tool, args);
+  const inner = new Request(new URL(path, request.url), {
+    method: spec.method,
+    headers: {
+      "content-type": "application/json",
+      "x-forwarded-for": request.headers.get("x-forwarded-for") ?? "",
+      "cf-connecting-ip": request.headers.get("cf-connecting-ip") ?? "",
+      "x-rout-via": "mcp",
+      ...headers,
+    },
+    body: spec.method === "GET" ? undefined : JSON.stringify(body),
+  });
+  const res = await handler({ request: inner });
+  const out = await res.json().catch(() => ({}));
+  return toolResultFromAgent(res.status, out);
 }
 
 async function readProfile(args: Record<string, unknown>, origin: string) {
@@ -75,7 +109,7 @@ async function handle(msg: JsonRpcRequest, request: Request) {
         capabilities: { tools: { listChanged: false } },
         serverInfo: MCP_SERVER_INFO,
         instructions:
-          "ROUT: sovereign identity and routing. Read public profiles freely; write tools need a ROUT OAuth token with agent scopes and never publish — when a tool returns human_action_required, show its action_url to your human.",
+          "ROUT (rout.be): link-in-bio profile hubs, social links for website footers, dynamic QR/short links and Login with ROUT for developers. No account? Build a whole workspace yourself: rout_sandbox_challenge → solve → rout_sandbox_register → rout_pow_challenge(scope=workspace) → rout_sandbox_create_workspace → rout_sandbox_design_profile (links, socials) → optional rout_sandbox_set_login_apps. Give your human the claim code: they sign in at rout.be and enter it under workspace settings → Claim. OAuth tools (rout_generate_qr, rout_create_draft, rout_provision_workspace) need a ROUT OAuth token and never publish; when a tool returns human_action_required, show its action_url.",
       });
     case "ping":
       return rpcResult(id, {});
@@ -88,6 +122,7 @@ async function handle(msg: JsonRpcRequest, request: Request) {
       const args = (params["arguments"] && typeof params["arguments"] === "object" ? params["arguments"] : {}) as Record<string, unknown>;
       const { publicOrigin } = await import("@/lib/agent/agent-auth.server");
       const origin = publicOrigin(request);
+      if (tool.sandbox) return rpcResult(id, await callSandbox(tool, args, request));
       if (!tool.agentPath) return rpcResult(id, await readProfile(args, origin));
       const handler = await agentHandler(tool.agentPath);
       if (!handler) return rpcError(id, -32603, "Tool handler unavailable.");
