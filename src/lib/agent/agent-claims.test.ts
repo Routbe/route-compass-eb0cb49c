@@ -72,7 +72,7 @@ describe("24-hour lifecycle", () => {
   it("expires exactly 24 hours after creation", () => {
     const created = new Date("2026-11-02T09:00:00Z");
     expect(AGENT_WORKSPACE_TTL_HOURS).toBe(24);
-    expect(claimExpiry(created).toISOString()).toBe("2026-11-04T09:00:00.000Z");
+    expect(claimExpiry(created).toISOString()).toBe("2026-11-03T09:00:00.000Z");
   });
   it("claim URLs point at the claim page", () => {
     expect(claimUrl("https://rout.be", "t".repeat(64))).toBe(`https://rout.be/claim/workspace/${"t".repeat(64)}`);
