@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DocHelpLink } from "@/components/seo/DocHelpLink";

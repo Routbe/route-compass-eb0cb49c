@@ -917,5 +917,7 @@
   "studio.logoBar.followsProfile": "Volgt de linkweergave van je profiel.",
   "studio.logoBar.hint": "Je hebt {{count}} logo's onder je bio. Vanaf 6 logo's kies je in Vormgeving tussen doorlopende rijen of een schuifbalk.",
   "studio.logoBar.choose": "{{count}} logo's onder je bio. Kies in Vormgeving → Lagen-studio: onder elkaar doorlopen of een horizontale schuifbalk.",
-  "booking.done.masked": "Open de link uit je bevestigingsmail om het tijdstip en de details te zien."
+  "booking.done.masked": "Open de link uit je bevestigingsmail om het tijdstip en de details te zien.",
+  "studio.editor.qrWorkspace": "Workspace QR-code",
+  "studio.editor.qrWorkspaceDownload": "Workspace QR-code ontwerpen en downloaden"
 }
