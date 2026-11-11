@@ -10,7 +10,7 @@ import { z } from "zod";
  * - Provisioning accepts no e-mail address — the agent delivers the link.
  */
 
-export const AGENT_WORKSPACE_TTL_HOURS = 48;
+export const AGENT_WORKSPACE_TTL_HOURS = 24;
 export const AGENT_WORKSPACE_TOKEN_BYTES = 32;
 
 /** 64 lowercase hex characters (32 bytes). */

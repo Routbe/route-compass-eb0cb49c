@@ -16,7 +16,7 @@ import { WORKSPACE_PERSONAL_ONLY_PREFS } from "@/lib/workspace-studio";
  *   claim time with the claiming human as owner, so nothing can sign in early.
  */
 
-export const SANDBOX_TTL_HOURS = 48;
+export const SANDBOX_TTL_HOURS = 24;
 export const SANDBOX_KEY_PREFIX = "rsk_";
 export const SANDBOX_KEY_PATTERN = /^rsk_[0-9a-f]{64}$/;
 export const POW_DIFFICULTY_BITS = 20;
