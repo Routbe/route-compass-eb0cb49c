@@ -44,7 +44,7 @@ export const Route = createFileRoute("/api_/agent/sandbox_/workspace")({
                 "In ROUT: Profile → Personal → the gear icon next to “New workspace” → Claim workspace.",
                 "Scan the QR code or type the claim code, then sign in and confirm.",
               ],
-              note: "Shown once. Single-use; expires with the sandbox (48 h). ROUT sends no e-mail. Nothing is public until claimed.",
+              note: "Shown once. Single-use; expires with the sandbox (24 h). ROUT sends no e-mail. Nothing is public until claimed.",
             },
             201,
           );
