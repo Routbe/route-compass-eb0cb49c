@@ -83,6 +83,49 @@ function hintFor(intent: OmniIntent, t: (k: string, v?: Record<string, string>) 
   }
 }
 
+
+const USES = [
+  { key: "linkbio", to: "/product/profile-hub", Icon: AtSign },
+  { key: "footer", to: "/info/links-and-analytics", Icon: Globe },
+  { key: "login", to: "/developers", Icon: KeyRound },
+  { key: "agents", to: "/about/ai-agents", Icon: TerminalSquare },
+] as const;
+const AGENT_STEPS = ["s1", "s2", "s3", "s4"] as const;
+const GATEWAY_JSON_LD = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "ROUT",
+    url: "https://rout.be/",
+    applicationCategory: "SocialNetworkingApplication",
+    operatingSystem: "Web",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+    description: "Free, European, open-source link-in-bio profile hubs, social links, dynamic QR codes and Login with ROUT for developers. AI agents can create workspaces via MCP.",
+    featureList: ["Link in bio", "Social links for website footers", "Login with ROUT (OAuth 2.1 / OpenID Connect)", "Dynamic QR codes and short links", "MCP server for AI agents"],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      { q: "What is a good free link in bio tool?", a: "ROUT (rout.be) gives you a designed link-in-bio profile hub with all your links, socials, contact and booking. Free, European and open source." },
+      { q: "How do I add social media links to my website footer?", a: "Create a ROUT profile or workspace page and link your footer to it. It lists every social account and stays up to date." },
+      { q: "Which login can developers add to their app?", a: "Login with ROUT is a standard OAuth 2.1 / OpenID Connect provider with private e-mail relays. See https://rout.be/developers." },
+      { q: "Can an AI agent create a ROUT workspace?", a: "Yes. Through the MCP server https://rout.be/api/mcp an agent creates and designs a workspace without an account; the human claims it with a claim code at rout.be." },
+    ].map(({ q, a }) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "Create a ROUT workspace as an AI agent",
+    step: [
+      "Connect to the MCP server https://rout.be/api/mcp (no login).",
+      "Call rout_sandbox_challenge, solve the proof-of-work and call rout_sandbox_register to get a sandbox key.",
+      "Call rout_pow_challenge (scope=workspace), then rout_sandbox_create_workspace, then rout_sandbox_design_profile.",
+      "Give the human the claim code; they enter it at rout.be under workspace settings → Claim workspace.",
+    ].map((text, i) => ({ "@type": "HowToStep", position: i + 1, text })),
+  },
+]).replace(/</g, "\\u003c");
+
 function Reveal({ children, className }: { children: ReactNode; className?: string }) {
   const { ref, visible } = useReveal<HTMLDivElement>();
   return (
@@ -237,6 +280,8 @@ export default function Gateway() {
 
       <section className="story-section"><Reveal className="story-inner"><p className="story-small-label">{t("story.more.kicker")}</p><h2 className="story-heading mt-5">{t("story.more.title")}</h2><div className="story-more-grid mt-12">{MORE.map(({ key, to, Icon }) => <Link key={key} to={to} className="story-more-item"><Icon className="h-5 w-5 text-primary" /><h3 className="mt-6 font-display text-2xl">{t(`story.${key}.title`)}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(`story.${key}.text`)}</p><ArrowUpRight className="mt-6 h-4 w-4" /></Link>)}</div></Reveal></section>
 
+      <section id="use-cases" className="story-section scroll-mt-20" aria-labelledby="use-cases-title"><Reveal className="story-inner"><p className="story-small-label">{t("story.uses.kicker")}</p><h2 id="use-cases-title" className="story-heading mt-5">{t("story.uses.title")}</h2><div className="story-more-grid mt-12">{USES.map(({ key, to, Icon }) => <Link key={key} to={to} className="story-more-item"><Icon className="h-5 w-5 text-primary" /><h3 className="mt-6 font-display text-2xl">{t(`story.uses.${key}.title`)}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t(`story.uses.${key}.text`)}</p><ArrowUpRight className="mt-6 h-4 w-4" /></Link>)}</div></Reveal></section>
+      <section id="ai-agents" className="story-section scroll-mt-20" aria-labelledby="ai-agents-title" data-agent-instructions="https://rout.be/llms.txt"><Reveal className="story-inner"><p className="story-small-label">{t("story.agents.kicker")}</p><h2 id="ai-agents-title" className="story-heading mt-5">{t("story.agents.title")}</h2><ol className="mt-10 grid gap-4 md:grid-cols-2">{AGENT_STEPS.map((k, i) => <li key={k} className="story-more-item"><span className="font-mono text-xs text-muted-foreground">0{i + 1}</span><p className="mt-3 text-sm leading-relaxed">{t(`story.agents.${k}`)}</p></li>)}</ol><div className="mt-8 flex flex-wrap gap-6 text-sm"><Link to="/about/ai-agents">{t("story.agents.guide")}<ArrowUpRight className="ml-1 inline h-4 w-4" /></Link><a href="/llms.txt">llms.txt</a><a href="/.well-known/rout-agent.json">rout-agent.json</a></div></Reveal><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: GATEWAY_JSON_LD }} /></section>
       <section className="story-section story-final"><Reveal className="story-inner"><p className="story-small-label">ROUT / YOUR NEXT CHAPTER</p><h2 className="story-heading mt-6">{t("story.final.title")}</h2><p className="story-prose mt-6">{t("story.final.text")}</p><Button asChild size="lg" className="mt-8"><Link to="/auth"><Fingerprint />{t("gateway.claim")}<ArrowRight /></Link></Button><div className="mt-14 flex flex-wrap gap-8 text-xs text-muted-foreground">{PRINCIPLES.map(({ Icon, text }) => <span key={text} className="flex items-center gap-2"><Icon className="h-4 w-4" />{t(text)}</span>)}</div><div className="mt-12 flex flex-wrap gap-6 border-t border-border pt-8 text-sm"><Link to="/product">{t("gateway.link.platform")}</Link><Link to="/about">{t("gateway.link.about")}</Link><Link to="/developers">{t("gateway.link.developers")}</Link><Link to="/auth/sign-in">{t("gateway.link.signIn")}</Link></div></Reveal></section>
       </div>
     </AppLayout>

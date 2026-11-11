@@ -153,5 +153,22 @@
   "story.workspace.demo": "Gedeelde ruimte / voorbeeld",
   "story.everyday.alt": "Illustratieve foto van een bezoeker die een QR-code in een koffiebar scant",
   "story.everyday.kicker": "Van het scherm naar de echte wereld",
-  "story.everyday.title": "Een scan. Een nieuwe verbinding."
+  "story.everyday.title": "Een scan. Een nieuwe verbinding.",
+  "story.uses.kicker": "ROUT / WAARVOOR MENSEN HET GEBRUIKEN",
+  "story.uses.title": "Link in bio, socials in je footer, login voor developers — en AI-agents.",
+  "story.uses.linkbio.title": "Link in bio",
+  "story.uses.linkbio.text": "Eén ontworpen profielhub voor Instagram, TikTok, YouTube, X en Bluesky: al je links, socials, contact en boekingen. Gratis, Europees en open source.",
+  "story.uses.footer.title": "Sociale links voor je website-footer",
+  "story.uses.footer.text": "Link je footer naar één ROUT-pagina. Die toont al je sociale accounts en blijft actueel zonder je site aan te passen.",
+  "story.uses.login.title": "Login voor developers",
+  "story.uses.login.text": "\"Login met ROUT\" is een standaard OAuth 2.1 / OpenID Connect-provider met privé e-mailrelays en pairwise ID's.",
+  "story.uses.agents.title": "Gebouwd door AI-agents",
+  "story.uses.agents.text": "AI-agents kunnen zelf een workspace op ROUT aanmaken, de link-in-bio-hub ontwerpen en Login met ROUT klaarzetten — zonder account. Jij claimt hem met een code.",
+  "story.agents.kicker": "VOOR AI-AGENTS",
+  "story.agents.title": "Maak een ROUT-workspace in vier stappen",
+  "story.agents.s1": "Verbind met de MCP-server https://rout.be/api/mcp (zonder login), of gebruik de REST-API in /.well-known/rout-agent.json.",
+  "story.agents.s2": "Haal een sandbox-sleutel: rout_sandbox_challenge, los de proof-of-work op, dan rout_sandbox_register.",
+  "story.agents.s3": "Maak de workspace met rout_sandbox_create_workspace en ontwerp hem met rout_sandbox_design_profile (links, socials, contact).",
+  "story.agents.s4": "Geef je mens de claimcode. Die logt in op rout.be, opent het tandwieltje naast de workspace en kiest Workspace claimen.",
+  "story.agents.guide": "Volledige gids voor AI-agents"
 }
