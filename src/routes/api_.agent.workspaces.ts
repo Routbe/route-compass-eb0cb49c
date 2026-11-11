@@ -6,7 +6,7 @@ import { agentProvisionInput, claimUrl, provisionFailure } from "@/lib/agent/age
  * Creates an unowned staging workspace for an AI agent. Zero e-mail: the body
  * schema rejects any address field; ROUT never mails about agent workspaces.
  * The answer carries the claim token exactly once — the agent delivers the
- * claim link to its human. Unclaimed after 48 hours, the workspace is
+ * claim link to its human. Unclaimed after 24 hours, the workspace is
  * hard-deleted by the purge cron.
  */
 export const Route = createFileRoute("/api_/agent/workspaces")({
@@ -46,7 +46,7 @@ export const Route = createFileRoute("/api_/agent/workspaces")({
               claim_token: ws.claimToken,
               claim_url: claimUrl(publicOrigin(request), ws.claimToken),
               expires_at: ws.expiresAt,
-              note: "Deliver the claim link to your human. It is single-use and expires in 48 hours; ROUT sends no e-mail.",
+              note: "Deliver the claim link to your human. It is single-use and expires in 24 hours; ROUT sends no e-mail.",
             },
             201,
           );
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/api_/agent/workspaces")({
           const message = error instanceof Error ? error.message : "";
           const failure = provisionFailure(message);
           if (failure === "agent_quota_reached") {
-            return agentError(429, "rate_limited", "This member already has 3 unclaimed agent workspaces. Wait for a claim or the 48-hour expiry.");
+            return agentError(429, "rate_limited", "This member already has 3 unclaimed agent workspaces. Wait for a claim or the 24-hour expiry.");
           }
           if (failure === "slug_taken") {
             return agentError(400, "invalid_request", "That workspace slug is already taken. Choose another one.");

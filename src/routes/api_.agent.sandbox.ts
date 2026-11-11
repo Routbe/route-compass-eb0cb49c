@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 /**
  * Account-less entry for AI agents.
  * GET  /api/agent/sandbox → a signed proof-of-work challenge (10 min).
- * POST /api/agent/sandbox → { challenge, solution, agent_name } → a 48-hour
+ * POST /api/agent/sandbox → { challenge, solution, agent_name } → a 24-hour
  *      sandbox key (`rsk_…`), shown once. Find `solution` such that
  *      sha256(challenge + ":" + solution) starts with `difficulty_bits` zero bits.
  */

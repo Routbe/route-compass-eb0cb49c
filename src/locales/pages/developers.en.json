@@ -17,7 +17,7 @@
   "pages.developers.mcp.read": "public JSON-LD of a profile, alias or workspace",
   "pages.developers.mcp.qr": "QR code or short link (<c>assets:write</c>)",
   "pages.developers.mcp.draft": "prepare a Studio draft (<c>profile:draft</c>)",
-  "pages.developers.mcp.ws": "48-hour staging workspace with a claim link (<c>assets:write</c>)",
+  "pages.developers.mcp.ws": "24-hour staging workspace with a claim link (<c>assets:write</c>)",
   "pages.developers.start.1": "Create an app in the <l>Developer Console</l>: name, website and redirect URLs.",
   "pages.developers.start.2": "Store the <c>client_id</c> and the one-time <c>client_secret</c> on your server.",
   "pages.developers.start.3": "Point your OIDC library to the discovery URL below.",

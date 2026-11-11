@@ -68,10 +68,10 @@ describe("workspace slugs", () => {
   });
 });
 
-describe("48-hour lifecycle", () => {
-  it("expires exactly 48 hours after creation", () => {
+describe("24-hour lifecycle", () => {
+  it("expires exactly 24 hours after creation", () => {
     const created = new Date("2026-11-02T09:00:00Z");
-    expect(AGENT_WORKSPACE_TTL_HOURS).toBe(48);
+    expect(AGENT_WORKSPACE_TTL_HOURS).toBe(24);
     expect(claimExpiry(created).toISOString()).toBe("2026-11-04T09:00:00.000Z");
   });
   it("claim URLs point at the claim page", () => {

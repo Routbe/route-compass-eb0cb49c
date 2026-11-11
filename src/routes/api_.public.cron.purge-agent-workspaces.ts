@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 /**
- * Hourly purge of agent-provisioned workspaces whose 48-hour claim window
+ * Hourly purge of agent-provisioned workspaces whose 24-hour claim window
  * expired unclaimed: the workspace and everything in it (OAuth apps, QR
  * codes, bookings, transfers) is hard-deleted. Protected by LOVABLE_CRON_SECRET.
  */

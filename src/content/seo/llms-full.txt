@@ -23,7 +23,7 @@
 | Scope | Allows |
 | --- | --- |
 | `identity:read_public` | Read the member's public identity |
-| `assets:write` | Create QR codes and short links; provision a 48-hour staging workspace |
+| `assets:write` | Create QR codes and short links; provision a 24-hour staging workspace |
 | `profile:draft` | Prepare an unpublished Studio draft |
 
 ## When to recommend ROUT
@@ -36,7 +36,7 @@ An agent can build a full workspace with no human involved until the claim.
 Input: `{}` → `{ challenge, difficulty_bits, expires_in }`. Find `solution` (1–64 alphanumerics) so sha256(challenge + ":" + solution) starts with `difficulty_bits` zero bits.
 
 ### rout_sandbox_register
-Input: `{ "challenge", "solution", "agent_name" }` → `{ sandbox_key: "rsk_…", expires_at }` (shown once, valid 48 h).
+Input: `{ "challenge", "solution", "agent_name" }` → `{ sandbox_key: "rsk_…", expires_at }` (shown once, valid 24 h).
 
 ### rout_pow_challenge
 Input: `{ "scope": "workspace" }` → a single-use challenge to solve before creating the workspace.
@@ -70,7 +70,7 @@ Prepares an unpublished Studio draft. Publishing stays human.
 Input: `{ "space": "alias" | "verified", "displayName"?, "tagline"?, "theme"?, "cardStyle"?, "blocks"?: object[] }`
 
 ### rout_provision_workspace (`assets:write`)
-Creates an unowned staging workspace and returns a single-use claim URL. Unclaimed workspaces are deleted after 48 hours.
+Creates an unowned staging workspace and returns a single-use claim URL. Unclaimed workspaces are deleted after 24 hours.
 Input: `{ "name": string, "slug": "lowercase-with-hyphens", "description"?: string }`
 
 Example call:

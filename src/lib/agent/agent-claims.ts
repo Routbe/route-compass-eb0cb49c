@@ -6,7 +6,7 @@ import { z } from "zod";
  *
  * Zero-trust rules:
  * - The claim token is 32 random bytes as hex; only its SHA-256 hash is stored.
- * - A staging workspace lives exactly 48 hours; unclaimed means hard-deleted.
+ * - A staging workspace lives exactly 24 hours; unclaimed means hard-deleted.
  * - Provisioning accepts no e-mail address — the agent delivers the link.
  */
 
@@ -40,7 +40,7 @@ export function claimUrl(origin: string, token: string): string {
   return `${origin}/claim/workspace/${token}`;
 }
 
-/** The 48-hour lifetime is exact — the database constraint enforces the same. */
+/** The 24-hour lifetime is exact — the database constraint enforces the same. */
 export function claimExpiry(createdAt: Date): Date {
   return new Date(createdAt.getTime() + AGENT_WORKSPACE_TTL_HOURS * 60 * 60 * 1000);
 }
