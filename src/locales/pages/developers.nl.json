@@ -17,7 +17,7 @@
   "pages.developers.mcp.read": "publieke JSON-LD van een profiel, alias of workspace",
   "pages.developers.mcp.qr": "QR-code of korte link (<c>assets:write</c>)",
   "pages.developers.mcp.draft": "Studio-concept klaarzetten (<c>profile:draft</c>)",
-  "pages.developers.mcp.ws": "staging-workspace van 48 uur met claim-link (<c>assets:write</c>)",
+  "pages.developers.mcp.ws": "staging-workspace van 24 uur met claim-link (<c>assets:write</c>)",
   "pages.developers.start.1": "Maak een app in de <l>Developer Console</l>: naam, website en terug-adressen.",
   "pages.developers.start.2": "Bewaar de <c>client_id</c> en het eenmalig getoonde <c>client_secret</c> op je server.",
   "pages.developers.start.3": "Wijs je OIDC-bibliotheek naar het discovery-adres hieronder.",

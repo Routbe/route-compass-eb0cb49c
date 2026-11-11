@@ -80,7 +80,7 @@ function ClaimWorkspaceHub() {
       }
       const st = claimState(p);
       if (st === "claimed") setError("Deze workspace is al geclaimd.");
-      else if (st === "expired") setError("Deze claim is verlopen. Ongeclaimde workspaces worden na 48 uur verwijderd.");
+      else if (st === "expired") setError("Deze claim is verlopen. Ongeclaimde workspaces worden na 24 uur verwijderd.");
       else {
         setInput(data);
         setInfo(p);

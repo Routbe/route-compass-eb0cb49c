@@ -27,7 +27,7 @@ export const Route = createFileRoute("/claim_/workspace/$token")({
 
 const MESSAGES: Record<string, string> = {
   claimed: "Deze workspace is al geclaimd.",
-  expired: "Deze claim-link is verlopen. Ongeclaimde workspaces worden na 48 uur verwijderd.",
+  expired: "Deze claim-link is verlopen. Ongeclaimde workspaces worden na 24 uur verwijderd.",
   invalid: "Deze claim-link bestaat niet (meer).",
   error: "Claimen mislukt. Vernieuw de pagina en probeer het opnieuw.",
 };

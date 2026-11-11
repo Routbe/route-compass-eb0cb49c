@@ -5,7 +5,7 @@ import { WORKSPACE_PERSONAL_ONLY_PREFS } from "@/lib/workspace-studio";
  * Pure rules for account-less AI agent sandboxes. Browser-safe: WebCrypto
  * only, no env reads, no I/O.
  *
- * Flow: challenge (signed, 10 min) → proof-of-work → sandbox key (48 h) →
+ * Flow: challenge (signed, 10 min) → proof-of-work → sandbox key (24 h) →
  * one unowned workspace + login-app specs + Studio draft → a human claims it
  * with the link, the QR code (same link) or the typed claim code.
  *
@@ -16,7 +16,7 @@ import { WORKSPACE_PERSONAL_ONLY_PREFS } from "@/lib/workspace-studio";
  *   claim time with the claiming human as owner, so nothing can sign in early.
  */
 
-export const SANDBOX_TTL_HOURS = 48;
+export const SANDBOX_TTL_HOURS = 24;
 export const SANDBOX_KEY_PREFIX = "rsk_";
 export const SANDBOX_KEY_PATTERN = /^rsk_[0-9a-f]{64}$/;
 export const POW_DIFFICULTY_BITS = 20;

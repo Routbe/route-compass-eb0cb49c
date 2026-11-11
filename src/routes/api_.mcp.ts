@@ -27,6 +27,16 @@ const json = (body: unknown, status = 200, extra: Record<string, string> = {}) =
     headers: { "content-type": "application/json", "cache-control": "no-store", ...extra },
   });
 
+/** Copy only client-IP headers that are present: an empty value would put every MCP caller in one rate-limit bucket. */
+function forwardedIpHeaders(request: Request): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const h of ["cf-connecting-ip", "x-real-ip", "x-forwarded-for"]) {
+    const v = request.headers.get(h)?.trim();
+    if (v) out[h] = v;
+  }
+  return out;
+}
+
 type Handler = (ctx: { request: Request }) => Promise<Response>;
 
 async function agentHandler(path: string): Promise<Handler | null> {
@@ -62,8 +72,7 @@ async function callSandbox(tool: McpTool, args: Record<string, unknown>, request
     method: spec.method,
     headers: {
       "content-type": "application/json",
-      "x-forwarded-for": request.headers.get("x-forwarded-for") ?? "",
-      "cf-connecting-ip": request.headers.get("cf-connecting-ip") ?? "",
+      ...forwardedIpHeaders(request),
       "x-rout-via": "mcp",
       ...headers,
     },
@@ -131,8 +140,7 @@ async function handle(msg: JsonRpcRequest, request: Request) {
         headers: {
           "content-type": "application/json",
           authorization: request.headers.get("authorization") ?? "",
-          "x-forwarded-for": request.headers.get("x-forwarded-for") ?? "",
-          "cf-connecting-ip": request.headers.get("cf-connecting-ip") ?? "",
+          ...forwardedIpHeaders(request),
           "x-rout-via": "mcp",
         },
         body: JSON.stringify(args),

@@ -29,3 +29,17 @@
 - [ ] Hoofdstijl = strakke klassieke toets (geen gloed, harde schaduwrand + indruk-effect); glasstijl echt glas; knopvormen veranderen mee
 - [ ] Onthouden welke pagina laatst open was (privé of geverifieerd)
 - [ ] ROUT-badge klopt niet altijd
+- [x] AI-agent sandbox: MCP-tools zonder login, live end-to-end getest op Neon (rout_app-rol)
+- [x] Wees-data: agent-workspaces en sandbox-sleutels leven 24 uur; opruimen bij elke nieuwe sandbox + bestaande cron-route
+- [x] Rate limit: max 5 sandbox-registraties per IP per uur (plus 5 per IP per 24 u in de database)
+- [ ] Claim-flow live testen als ingelogde gebruiker (wacht op BETTER_AUTH_SECRET)
+- [ ] Neon-verbinding omzetten naar rout_app-account (nu nog neondb_owner; app schakelt per transactie wel naar rout_app)
+- [ ] Workspace-slug: draft-username mist het achtervoegsel dat de database aan de slug toevoegt
+- [ ] Workspace QR-code: knop "Profiel-QR-code" hernoemen en bewaarde workspace-QR laden
+- [ ] Studio onthoudt laatst gekozen privé/geverifieerd
+- [ ] ROUT-badge: "badge verbergen" respecteren op externe sites; doneerpagina en etalage even streng als profiel
+- [ ] Kleine Studio-labels ("Verborgen") binnen hun kader houden
+- [ ] Glasstijl verbeteren
+- [ ] Kaartteksten EN/FR/DE (beveiligingsvak + ~30 teksten)
+- [ ] Ingelogde kaarttest: bevriezen, blokkeren, vervangen, scanpagina, widget
+- [x] Testen live-blokken en afspraakbevestiging uitgevoerd (55 geslaagd)

@@ -97,8 +97,8 @@ export const MCP_TOOLS: readonly McpTool[] = [
   },
   {
     name: "rout_provision_workspace",
-    title: "Provision a 48-hour staging workspace",
-    description: "Creates an unowned staging workspace and returns a single-use claim URL for the human. No e-mail is sent; unclaimed workspaces are deleted after 48 hours. Requires the assets:write scope.",
+    title: "Provision a 24-hour staging workspace",
+    description: "Creates an unowned staging workspace and returns a single-use claim URL for the human. No e-mail is sent; unclaimed workspaces are deleted after 24 hours. Requires the assets:write scope.",
     scope: "assets:write",
     agentPath: "/api/agent/workspaces",
     inputSchema: obj({
@@ -121,7 +121,7 @@ export const MCP_TOOLS: readonly McpTool[] = [
   {
     name: "rout_sandbox_register",
     title: "Register a sandbox (step 2: get a sandbox key)",
-    description: "Exchanges a solved challenge for a 48-hour sandbox key (rsk_…), shown once. The key reaches only the one workspace you create.",
+    description: "Exchanges a solved challenge for a 24-hour sandbox key (rsk_…), shown once. The key reaches only the one workspace you create.",
     scope: null, agentPath: null,
     sandbox: { method: "POST", path: "/api/agent/sandbox" },
     inputSchema: obj({
@@ -143,7 +143,7 @@ export const MCP_TOOLS: readonly McpTool[] = [
   {
     name: "rout_sandbox_create_workspace",
     title: "Create the workspace (step 3)",
-    description: "Creates the sandbox's one unowned workspace (rout.be/w/<slug>) and returns, once, the claim code, claim link and QR code to give your human. They sign in or sign up at rout.be and enter the code (profile menu → workspace settings → Claim). Unclaimed workspaces are deleted after 48 hours.",
+    description: "Creates the sandbox's one unowned workspace (rout.be/w/<slug>) and returns, once, the claim code, claim link and QR code to give your human. They sign in or sign up at rout.be and enter the code (profile menu → workspace settings → Claim). Unclaimed workspaces are deleted after 24 hours.",
     scope: null, agentPath: null,
     sandbox: { method: "POST", path: "/api/agent/sandbox/workspace" },
     inputSchema: obj({

@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 /**
  * Account-less entry for AI agents.
  * GET  /api/agent/sandbox → a signed proof-of-work challenge (10 min).
- * POST /api/agent/sandbox → { challenge, solution, agent_name } → a 48-hour
+ * POST /api/agent/sandbox → { challenge, solution, agent_name } → a 24-hour
  *      sandbox key (`rsk_…`), shown once. Find `solution` such that
  *      sha256(challenge + ":" + solution) starts with `difficulty_bits` zero bits.
  */
@@ -26,12 +26,20 @@ export const Route = createFileRoute("/api_/agent/sandbox")({
       POST: async ({ request }) => {
         const { agentError, agentOk } = await import("@/lib/agent/responses");
         const { guardShared, clientIp } = await import("@/lib/rate-limit-db.server");
-        const limited = await guardShared(request, "agent-sandbox-register", { limit: 10, windowSec: 3600 });
+        const limited = await guardShared(request, "agent-sandbox-register", { limit: 5, windowSec: 3600 });
         if (limited) return limited;
         const { sandboxRegisterInput } = await import("@/lib/agent/agent-sandbox");
         const rawBody: unknown = await request.json().catch(() => null);
         const parsed = sandboxRegisterInput.safeParse(rawBody);
         if (!parsed.success) return (await import("@/lib/agent/responses")).agentValidationError(parsed.error, rawBody);
+        // Garbage collection without a scheduler: every registration first purges
+        // expired, unclaimed agent workspaces and sandbox keys (24-hour TTL).
+        try {
+          const { purgeUnclaimedAgentWorkspaces } = await import("@/lib/agent/agent-workspaces.server");
+          await purgeUnclaimedAgentWorkspaces();
+        } catch (error) {
+          console.error("[agent:sandbox] purge", (error as Error).message);
+        }
         try {
           const { registerSandbox } = await import("@/lib/agent/agent-sandbox.server");
           const s = await registerSandbox({ challenge: parsed.data.challenge, solution: parsed.data.solution, agentName: parsed.data.agent_name, ip: clientIp(request) });
