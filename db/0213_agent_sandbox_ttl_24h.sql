@@ -3,14 +3,15 @@
 -- bookings and transfers, plus expired sandbox keys, are hard-deleted by
 -- rout_purge_unclaimed_agent_workspaces().
 
+alter table public.agent_workspace_claims drop constraint if exists agent_workspace_claims_48h;
+alter table public.agent_sandboxes drop constraint if exists agent_sandboxes_48h;
+
 update public.agent_workspace_claims set expires_at = created_at + interval '24 hours'
  where claimed_at is null;
 update public.agent_sandboxes set expires_at = created_at + interval '24 hours';
 
-alter table public.agent_workspace_claims drop constraint if exists agent_workspace_claims_48h;
 alter table public.agent_workspace_claims add constraint agent_workspace_claims_24h
   check (claimed_at is not null or expires_at = created_at + interval '24 hours');
-alter table public.agent_sandboxes drop constraint if exists agent_sandboxes_48h;
 alter table public.agent_sandboxes add constraint agent_sandboxes_24h
   check (expires_at = created_at + interval '24 hours');
 
