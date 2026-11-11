@@ -52,6 +52,19 @@ export default function Studio({ initialGrid = false }: { initialGrid?: boolean 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("page") === "booking") setPageMode("booking");
   }, []);
+  // Onthoud per gebruiker welk profiel (privé of geverifieerd) laatst open was; alleen een UI-voorkeur in deze browser.
+  const variantKey = user ? `rout:studio-variant:${user.id}` : null;
+  useEffect(() => {
+    if (!variantKey) return;
+    try {
+      const saved = window.localStorage.getItem(variantKey);
+      if (saved === "alias" || saved === "verified") setVariant(saved);
+    } catch { /* storage geblokkeerd: standaard blijft privé */ }
+  }, [variantKey]);
+  useEffect(() => {
+    if (!variantKey || (variant !== "alias" && variant !== "verified")) return;
+    try { window.localStorage.setItem(variantKey, variant); } catch { /* negeren */ }
+  }, [variantKey, variant]);
   const [pages, setPages] = useState({ tipEnabled: false, qaEnabled: false, handle: "" });
   const updatePages = useCallback((next: { tipEnabled: boolean; qaEnabled: boolean; handle: string }) => setPages(next), []);
   const fetchState = useServerFn(getVerificationState);
