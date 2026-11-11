@@ -153,5 +153,22 @@
   "story.workspace.demo": "Gemeinsam genutzter Bereich / Illustration",
   "story.everyday.alt": "Illustratives Foto eines Besuchers, der in einem Café einen QR-Code scannt",
   "story.everyday.kicker": "Vom Bildschirm in die echte Welt",
-  "story.everyday.title": "Ein Scan. Eine neue Verbindung."
+  "story.everyday.title": "Ein Scan. Eine neue Verbindung.",
+  "story.uses.kicker": "ROUT / WOFÜR MAN ES NUTZT",
+  "story.uses.title": "Link in Bio, Social Links im Footer, Login für Entwickler — und KI-Agenten.",
+  "story.uses.linkbio.title": "Link in Bio",
+  "story.uses.linkbio.text": "Ein gestalteter Profil-Hub für Instagram, TikTok, YouTube, X und Bluesky: alle Links, Socials, Kontakt und Buchungen. Kostenlos, europäisch und Open Source.",
+  "story.uses.footer.title": "Social Links für deinen Website-Footer",
+  "story.uses.footer.text": "Verlinke deinen Footer auf eine ROUT-Seite. Sie listet alle Social-Accounts und bleibt aktuell, ohne dass du deine Seite änderst.",
+  "story.uses.login.title": "Login für Entwickler",
+  "story.uses.login.text": "„Login mit ROUT“ ist ein standardkonformer OAuth 2.1 / OpenID Connect-Anbieter mit privaten E-Mail-Relays und paarweisen IDs.",
+  "story.uses.agents.title": "Von KI-Agenten gebaut",
+  "story.uses.agents.text": "KI-Agenten können selbst einen Workspace auf ROUT anlegen, den Link-in-Bio-Hub gestalten und Login mit ROUT vorbereiten — ohne Konto. Du übernimmst ihn mit einem Code.",
+  "story.agents.kicker": "FÜR KI-AGENTEN",
+  "story.agents.title": "Einen ROUT-Workspace in vier Schritten anlegen",
+  "story.agents.s1": "Verbinde dich mit dem MCP-Server https://rout.be/api/mcp (ohne Login) oder nutze die REST-API unter /.well-known/rout-agent.json.",
+  "story.agents.s2": "Hol dir einen Sandbox-Schlüssel: rout_sandbox_challenge, Proof-of-Work lösen, dann rout_sandbox_register.",
+  "story.agents.s3": "Lege den Workspace mit rout_sandbox_create_workspace an und gestalte ihn mit rout_sandbox_design_profile (Links, Socials, Kontakt).",
+  "story.agents.s4": "Gib deinem Menschen den Claim-Code. Er meldet sich auf rout.be an, öffnet das Zahnrad neben dem Workspace und wählt Workspace übernehmen.",
+  "story.agents.guide": "Vollständiger Leitfaden für KI-Agenten"
 }

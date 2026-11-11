@@ -153,5 +153,22 @@
   "story.workspace.demo": "Shared space / illustration",
   "story.everyday.alt": "Illustrative photograph of a visitor scanning a QR code in a coffee bar",
   "story.everyday.kicker": "From the screen to the real world",
-  "story.everyday.title": "One scan. A new connection."
+  "story.everyday.title": "One scan. A new connection.",
+  "story.uses.kicker": "ROUT / WHAT PEOPLE USE IT FOR",
+  "story.uses.title": "Link in bio, footer socials, developer login — and AI agents.",
+  "story.uses.linkbio.title": "Link in bio",
+  "story.uses.linkbio.text": "One designed profile hub for Instagram, TikTok, YouTube, X and Bluesky: all your links, socials, contact and booking. Free, European and open source.",
+  "story.uses.footer.title": "Social links for your website footer",
+  "story.uses.footer.text": "Link your footer to one ROUT page. It lists every social account and stays up to date without touching your site.",
+  "story.uses.login.title": "Login for developers",
+  "story.uses.login.text": "\"Login with ROUT\" is a standard OAuth 2.1 / OpenID Connect provider with private e-mail relays and pairwise IDs.",
+  "story.uses.agents.title": "Built by AI agents",
+  "story.uses.agents.text": "AI agents can create a workspace on ROUT themselves, design its link-in-bio hub and prepare Login with ROUT — without an account. You claim it with a code.",
+  "story.agents.kicker": "FOR AI AGENTS",
+  "story.agents.title": "Create a ROUT workspace in four steps",
+  "story.agents.s1": "Connect to the MCP server https://rout.be/api/mcp (no login), or use the REST API in /.well-known/rout-agent.json.",
+  "story.agents.s2": "Get a sandbox key: rout_sandbox_challenge, solve the proof-of-work, then rout_sandbox_register.",
+  "story.agents.s3": "Create the workspace with rout_sandbox_create_workspace and design it with rout_sandbox_design_profile (links, socials, contact).",
+  "story.agents.s4": "Give your human the claim code. They sign in at rout.be, open the gear next to their workspace and choose Claim workspace.",
+  "story.agents.guide": "Full guide for AI agents"
 }

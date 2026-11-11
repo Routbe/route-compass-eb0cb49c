@@ -153,5 +153,22 @@
   "story.workspace.demo": "Espace partagé / illustration",
   "story.everyday.alt": "Photo illustrative d’un visiteur scannant un QR code dans un café",
   "story.everyday.kicker": "De l’écran au monde réel",
-  "story.everyday.title": "Un scan. Une nouvelle connexion."
+  "story.everyday.title": "Un scan. Une nouvelle connexion.",
+  "story.uses.kicker": "ROUT / À QUOI ÇA SERT",
+  "story.uses.title": "Lien en bio, réseaux en pied de page, connexion pour développeurs — et agents IA.",
+  "story.uses.linkbio.title": "Lien en bio",
+  "story.uses.linkbio.text": "Un hub de profil soigné pour Instagram, TikTok, YouTube, X et Bluesky : tous vos liens, réseaux, contact et réservations. Gratuit, européen et open source.",
+  "story.uses.footer.title": "Liens sociaux pour le pied de page",
+  "story.uses.footer.text": "Reliez votre pied de page à une seule page ROUT. Elle liste tous vos comptes et reste à jour sans toucher à votre site.",
+  "story.uses.login.title": "Connexion pour développeurs",
+  "story.uses.login.text": "« Se connecter avec ROUT » est un fournisseur OAuth 2.1 / OpenID Connect standard, avec relais e-mail privés et identifiants par application.",
+  "story.uses.agents.title": "Créé par des agents IA",
+  "story.uses.agents.text": "Les agents IA peuvent créer eux-mêmes un espace sur ROUT, concevoir le hub de liens et préparer la connexion ROUT — sans compte. Vous le récupérez avec un code.",
+  "story.agents.kicker": "POUR LES AGENTS IA",
+  "story.agents.title": "Créer un espace ROUT en quatre étapes",
+  "story.agents.s1": "Connectez-vous au serveur MCP https://rout.be/api/mcp (sans connexion), ou utilisez l'API REST de /.well-known/rout-agent.json.",
+  "story.agents.s2": "Obtenez une clé sandbox : rout_sandbox_challenge, résolvez la preuve de travail, puis rout_sandbox_register.",
+  "story.agents.s3": "Créez l'espace avec rout_sandbox_create_workspace et concevez-le avec rout_sandbox_design_profile (liens, réseaux, contact).",
+  "story.agents.s4": "Donnez le code de réclamation à votre humain. Il se connecte sur rout.be, ouvre la roue dentée à côté de l'espace et choisit Réclamer.",
+  "story.agents.guide": "Guide complet pour agents IA"
 }
