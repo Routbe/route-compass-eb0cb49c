@@ -56,10 +56,10 @@ function Row({ icon, label, account, verified, badge, children }: {
         className="flex w-full min-w-0 items-center gap-2 p-3 text-left"
       >
         <BrandIcon icon={icon} />
-        <span className="text-sm font-medium">{label}</span>
+        <span className="min-w-0 max-w-[45%] truncate text-sm font-medium">{label}</span>
         {verified && <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-primary" aria-label="Geverifieerd" />}
         <span className="min-w-0 flex-1 truncate text-[11px] text-muted-foreground">{account}</span>
-        <span className="shrink-0 rounded-full border border-border px-2 py-0.5 text-[10px] text-muted-foreground">{badge}</span>
+        <span className="max-w-[7rem] shrink-0 truncate whitespace-nowrap rounded-full border border-border px-2 py-0.5 text-[10px] leading-4 text-muted-foreground" title={badge}>{badge}</span>
         <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
       {open && <div className="space-y-2 border-t border-border p-3">{children}</div>}
