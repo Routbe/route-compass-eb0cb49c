@@ -917,5 +917,7 @@
   "studio.logoBar.followsProfile": "Suit l'affichage des liens de votre profil.",
   "studio.logoBar.hint": "Vous avez {{count}} logos sous votre bio. À partir de 6 logos, choisissez dans Apparence entre des rangées ou une barre de défilement.",
   "studio.logoBar.choose": "{{count}} logos sous votre bio. Choisissez dans Apparence → Studio de calques : rangées successives ou barre de défilement horizontale.",
-  "booking.done.masked": "Ouvrez le lien de votre e-mail de confirmation pour voir l'heure et les détails."
+  "booking.done.masked": "Ouvrez le lien de votre e-mail de confirmation pour voir l'heure et les détails.",
+  "studio.editor.qrWorkspace": "QR code de l’espace de travail",
+  "studio.editor.qrWorkspaceDownload": "Concevoir et télécharger le QR code de l’espace de travail"
 }

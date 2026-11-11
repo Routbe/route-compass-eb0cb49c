@@ -89,7 +89,24 @@ export async function provisionSandboxWorkspace(ctx: SandboxContext, input: { na
   }>;
   const row = rows[0];
   if (!row) throw new Error("provision_failed");
+  // The database may append a suffix to keep the slug unique: the sealed draft must carry the real one.
+  if (row.slug !== input.slug) await syncDraftUsername({ ...ctx, workspaceId: row.workspace_id, slug: row.slug }, row.slug);
   return { workspaceId: row.workspace_id, slug: row.slug, expiresAt: row.expires_at, claimToken: token, claimCode: code };
+}
+
+/** Sets the locked `username` field of the sealed draft to the slug the database actually assigned. */
+async function syncDraftUsername(ctx: SandboxContext, slug: string): Promise<void> {
+  const state = await rawSandboxState(ctx);
+  if (!state) return;
+  const { openDraft, resealDraft, SEAL_MARKER } = await import("./agent-draft-seal");
+  const patch = await withDataKey(ctx, state.draft, async (dk, env) => {
+    if (!dk || !env) return null;
+    const draft = await openDraft(env, dk);
+    if (draft["username"] === slug) return null;
+    return { [SEAL_MARKER]: await resealDraft(env, dk, { ...draft, username: slug }) };
+  });
+  if (!patch) return;
+  await sql`select revision from public.rout_agent_sandbox_patch_draft(${ctx.keyHash}, ${JSON.stringify(patch)}::jsonb, ${"{}"}::jsonb)`;
 }
 
 async function rawSandboxState(ctx: SandboxContext) {

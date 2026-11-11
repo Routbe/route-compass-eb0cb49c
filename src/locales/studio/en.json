@@ -917,5 +917,7 @@
   "studio.logoBar.followsProfile": "Follows your profile's link display.",
   "studio.logoBar.hint": "You have {{count}} logos under your bio. From 6 logos you can choose wrapping rows or a scroll bar in Design.",
   "studio.logoBar.choose": "{{count}} logos under your bio. Choose in Design → Layer studio: wrap onto rows or a horizontal scroll bar.",
-  "booking.done.masked": "Open the link from your confirmation email to see the time and details."
+  "booking.done.masked": "Open the link from your confirmation email to see the time and details.",
+  "studio.editor.qrWorkspace": "Workspace QR code",
+  "studio.editor.qrWorkspaceDownload": "Design and download the workspace QR code"
 }

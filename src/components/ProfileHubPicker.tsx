@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useServerFn } from "@tanstack/react-start";
 import { getStudioProfile } from "@/lib/studio-profile.functions";
-import { saveQrSettingsFn, saveWorkspaceQrSettingsFn } from "@/lib/qr-settings.functions";
+import { getQrSettingsFn, getWorkspaceQrSettingsFn, saveQrSettingsFn, saveWorkspaceQrSettingsFn } from "@/lib/qr-settings.functions";
 import { getWorkspaceContext, type WorkspaceSummary } from "@/lib/workspaces.functions";
 import { getWorkspaceStudioProfile } from "@/lib/workspace-studio.functions";
 import { canEditWorkspaceHub, workspacePublicPath } from "@/lib/workspace-rules";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ProfileQrDesignContext } from "@/lib/qr-design-bridge";
+import { ProfileQrApplyContext, ProfileQrDesignContext } from "@/lib/qr-design-bridge";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { HANDLE_MIN_LENGTH, handleIssue, normalizeHandle, profilePath } from "@/lib/profile";
@@ -44,6 +44,9 @@ export function ProfileHubPicker({ values, onChange }: Props) {
   const [target, setTarget] = useState<string>("personal");
   const [wsPath, setWsPath] = useState<string | null>(null);
   const design = useContext(ProfileQrDesignContext);
+  const applyStyle = useContext(ProfileQrApplyContext);
+  const loadPersonalQr = useServerFn(getQrSettingsFn);
+  const loadWsQr = useServerFn(getWorkspaceQrSettingsFn);
   const activeWs = workspaces.find((w) => w.id === target) ?? null;
   const queryClient = useQueryClient();
 
@@ -118,6 +121,12 @@ export function ProfileHubPicker({ values, onChange }: Props) {
     setTarget(id);
     setSaved(false);
     const ws = list.find((w) => w.id === id);
+    // Show the QR design saved for the chosen profile, so "Opslaan" edits that one.
+    if (applyStyle) {
+      void (ws ? loadWsQr({ data: { workspaceId: ws.id } }) : loadPersonalQr())
+        .then((style) => { if (style) applyStyle(style); })
+        .catch((error) => console.error("[hub-picker:qr-style:failed]", error));
+    }
     if (!ws) {
       setWsPath(null);
       const h = handle ?? normalizeHandle(manual);

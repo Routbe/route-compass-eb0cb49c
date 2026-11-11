@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { Link2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DocHelpLink } from "@/components/seo/DocHelpLink";
@@ -11,7 +11,8 @@ import { QRPreview } from "@/components/QRPreview";
 import { QRTypeSelector, QRType, allQrTypes } from "@/components/QRTypeSelector";
 import { QRTypeSheet } from "@/components/QRTypeSheet";
 import { useI18n } from "@/lib/i18n";
-import { ProfileQrDesignContext, toProfileQrStyle } from "@/lib/qr-design-bridge";
+import { ProfileQrApplyContext, ProfileQrDesignContext, toProfileQrStyle } from "@/lib/qr-design-bridge";
+import type { ProfileQrStyle } from "@/lib/profile-qr";
 import { getQrSettingsFn } from "@/lib/qr-settings.functions";
 import { useServerFn } from "@tanstack/react-start";
 import { useAuth } from "@/hooks/useAuth";
@@ -104,22 +105,25 @@ const Index = () => {
   useEffect(() => {
     latestDesignKey.current = designKey;
   }, [designKey]);
+  const applySavedStyle = useCallback((style: ProfileQrStyle) => {
+    setFgColor(style.fgColor);
+    setBgColor(style.bgColor);
+    setBgGradient(style.bgGradient ?? null);
+    setLogo(style.logo ?? null);
+    setDotStyle((style.dotStyle ?? "square") as DotType);
+    setOuterCornerStyle((style.outerCornerStyle ?? "square") as CornerSquareType);
+    setInnerCornerStyle((style.innerCornerStyle ?? "square") as CornerDotType);
+    setLogoSize(style.logoSize ?? 0.4);
+    setLogoMargin(style.logoMargin ?? 10);
+    setHideBackgroundDots(style.hideBackgroundDots ?? true);
+  }, []);
   useEffect(() => {
     if (qrType !== "social" || !user) return;
     let cancelled = false;
     const before = latestDesignKey.current;
     void loadQrSettings().then(style => {
       if (cancelled || !style || before !== latestDesignKey.current) return;
-      setFgColor(style.fgColor);
-      setBgColor(style.bgColor);
-      setBgGradient(style.bgGradient ?? null);
-      setLogo(style.logo ?? null);
-      setDotStyle((style.dotStyle ?? "square") as DotType);
-      setOuterCornerStyle((style.outerCornerStyle ?? "square") as CornerSquareType);
-      setInnerCornerStyle((style.innerCornerStyle ?? "square") as CornerDotType);
-      setLogoSize(style.logoSize ?? 0.4);
-      setLogoMargin(style.logoMargin ?? 10);
-      setHideBackgroundDots(style.hideBackgroundDots ?? true);
+      applySavedStyle(style);
     }).catch(() => undefined);
     return () => { cancelled = true; };
   }, [qrType, user?.id, loadQrSettings]);
@@ -429,6 +433,7 @@ const Index = () => {
 
   return (
     <ProfileQrDesignContext.Provider value={profileQrStyle}>
+    <ProfileQrApplyContext.Provider value={applySavedStyle}>
     <AppLayout width="full" trustBadges>
       {/* Desktop app-shell: a strict 3-column grid so no pane can overlap another. */}
       <div className="grid w-full max-w-full grid-cols-1 overflow-x-hidden lg:h-[calc(100vh-4rem)] lg:grid-cols-[320px_minmax(0,1fr)_340px] lg:overflow-hidden xl:grid-cols-[360px_minmax(0,1fr)_400px]">
@@ -690,6 +695,7 @@ const Index = () => {
 
       <ValuesSection />
     </AppLayout>
+    </ProfileQrApplyContext.Provider>
     </ProfileQrDesignContext.Provider>
   );
 };

@@ -917,5 +917,7 @@
   "studio.logoBar.followsProfile": "Folgt der Linkanzeige deines Profils.",
   "studio.logoBar.hint": "Du hast {{count}} Logos unter deiner Bio. Ab 6 Logos wählst du unter Design zwischen umbrechenden Reihen oder einer Scrollleiste.",
   "studio.logoBar.choose": "{{count}} Logos unter deiner Bio. Wähle unter Design → Ebenen-Studio: in Reihen umbrechen oder horizontale Scrollleiste.",
-  "booking.done.masked": "Öffne den Link aus deiner Bestätigungs-E-Mail, um Uhrzeit und Details zu sehen."
+  "booking.done.masked": "Öffne den Link aus deiner Bestätigungs-E-Mail, um Uhrzeit und Details zu sehen.",
+  "studio.editor.qrWorkspace": "Workspace-QR-Code",
+  "studio.editor.qrWorkspaceDownload": "Workspace-QR-Code gestalten und herunterladen"
 }

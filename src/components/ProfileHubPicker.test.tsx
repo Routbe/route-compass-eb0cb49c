@@ -8,7 +8,7 @@ vi.mock("@tanstack/react-start", async (importOriginal) => ({
   ...await importOriginal<typeof import("@tanstack/react-start")>(),
   useServerFn: (fn: unknown) => fn,
 }));
-vi.mock("@/lib/qr-settings.functions", () => ({ saveQrSettingsFn: save, saveWorkspaceQrSettingsFn: vi.fn() }));
+vi.mock("@/lib/qr-settings.functions", () => ({ saveQrSettingsFn: save, saveWorkspaceQrSettingsFn: vi.fn(), getQrSettingsFn: vi.fn(async () => null), getWorkspaceQrSettingsFn: vi.fn(async () => null) }));
 vi.mock("@/lib/workspaces.functions", () => ({ getWorkspaceContext: async () => ({ workspaces: [] }) }));
 vi.mock("@/lib/workspace-studio.functions", () => ({ getWorkspaceStudioProfile: vi.fn() }));
 vi.mock("@/lib/studio-profile.functions", () => ({ getStudioProfile: load }));

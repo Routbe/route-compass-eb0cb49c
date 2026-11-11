@@ -25,7 +25,7 @@
 - [ ] Beveiliging nakijken van agenda en andere onderdelen (afspraken, boekingen, gedeelde links)
 - [ ] Koppelingen/live-integraties nakijken: koppelen werkt overal; live-blokken alleen zichtbaar bij actief of zeer recent (muziek, nieuwe post, bewerken, spelen)
 - [ ] Studio diepgaand nakijken: indicatoren (bv. "verborgen") niet buiten kader of afgesneden
-- [ ] Workspace-studio: knop heet "Workspace QR-code" en opent meteen de QR van die workspace
+- [x] Workspace-studio: knop heet "Workspace QR-code" en opent meteen de QR van die workspace
 - [ ] Hoofdstijl = strakke klassieke toets (geen gloed, harde schaduwrand + indruk-effect); glasstijl echt glas; knopvormen veranderen mee
 - [ ] Onthouden welke pagina laatst open was (privé of geverifieerd)
 - [ ] ROUT-badge klopt niet altijd
@@ -34,8 +34,8 @@
 - [x] Rate limit: max 5 sandbox-registraties per IP per uur (plus 5 per IP per 24 u in de database)
 - [ ] Claim-flow live testen als ingelogde gebruiker (wacht op BETTER_AUTH_SECRET)
 - [ ] Neon-verbinding omzetten naar rout_app-account (nu nog neondb_owner; app schakelt per transactie wel naar rout_app)
-- [ ] Workspace-slug: draft-username mist het achtervoegsel dat de database aan de slug toevoegt
-- [ ] Workspace QR-code: knop "Profiel-QR-code" hernoemen en bewaarde workspace-QR laden
+- [x] Workspace-slug: draft-username mist het achtervoegsel dat de database aan de slug toevoegt
+- [x] Workspace QR-code: knop "Profiel-QR-code" hernoemen en bewaarde workspace-QR laden
 - [ ] Studio onthoudt laatst gekozen privé/geverifieerd
 - [ ] ROUT-badge: "badge verbergen" respecteren op externe sites; doneerpagina en etalage even streng als profiel
 - [ ] Kleine Studio-labels ("Verborgen") binnen hun kader houden
